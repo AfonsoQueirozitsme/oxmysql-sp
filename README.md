@@ -1,5 +1,3 @@
-Here is the English version of the README for your oxmysql fork. It is tailored to highlight the shift from MySQL to PostgreSQL (Supabase) while maintaining the professional look of the Overextended brand.
-
 oxmysql (Supabase Edition) ⚡️
 A specialized fork of the oxmysql resource for FiveM, optimized to communicate with PostgreSQL databases hosted on Supabase.
 
