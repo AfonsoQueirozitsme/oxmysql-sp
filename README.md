@@ -1,34 +1,50 @@
-# oxmysql
+Here is the English version of the README for your oxmysql fork. It is tailored to highlight the shift from MySQL to PostgreSQL (Supabase) while maintaining the professional look of the Overextended brand.
 
-A FiveM resource to communicate with a MySQL database using [node-mysql2](https://github.com/sidorares/node-mysql2).
+oxmysql (Supabase Edition) ⚡️
+A specialized fork of the oxmysql resource for FiveM, optimized to communicate with PostgreSQL databases hosted on Supabase.
 
-![](https://img.shields.io/github/downloads/overextended/oxmysql/total?logo=github)
-![](https://img.shields.io/github/downloads/overextended/oxmysql/latest/total?logo=github)
-![](https://img.shields.io/github/contributors/overextended/oxmysql?logo=github)
-![](https://img.shields.io/github/v/release/overextended/oxmysql?logo=github) 
+📖 About this Fork
+Supabase uses PostgreSQL, which is fundamentally different from MySQL. This fork replaces the node-mysql2 driver with pg (node-postgres), allowing FiveM developers to leverage Supabase’s cloud infrastructure, real-time capabilities, and scaling without abandoning the familiar oxmysql API.
 
-## 🔗 Links
-- 💾 [Download](https://github.com/overextended/oxmysql/releases/latest/download/oxmysql.zip)
-  - Download the latest release directly.
-- 📚 [Documentation](https://overextended.dev/oxmysql)
-  - For installation, setup, and everything else.
-- 📦 [npm](https://www.npmjs.com/package/@overextended/oxmysql)
-  - Use our npm package for enhanced functionality and TypeScript support.
+✨ Key Features
+PostgreSQL Native: Full support for Supabase/Postgres query syntax.
 
-## ✨ Features
+Optimized Connection Pooling: Pre-configured to work with Supabase’s transaction pooler (PgBouncer) to prevent connection exhaustion.
 
-- Support for mysql-async and ghmattimysql syntax.
-- Promises / async query handling allowing for non-blocking and awaitable responses.
-- Improved performance and stability compared to other options.
-- Support for named and unnamed placeholders, improving performance and security.
-- Support for URI connection strings and semicolon separated values.
-- Improved parameter checking and error handling.
+SSL by Default: Automatically handles the SSL configurations required for secure cloud database connections.
 
-## 🧾 Logging
+Legacy Compatibility: Maintains the standard exports (oxmysql:execute, oxmysql:scalar, oxmysql:insert) to minimize refactoring of existing scripts.
 
-We have included a module for submitting error logs to [Fivemanage](https://fivemanage.com/?ref=overextended), a cloud management service tailored for game servers. Additional logging options and support for other services will be available in the future.
+🔗 Links
+💾 Download Release
 
-## Lua Language Server
+📚 Supabase Documentation
 
-- Install [Lua Language Server](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) to ease development with annotations, type checking, diagnostics, and more.
-- See [ox_types](https://github.com/overextended/ox_types) for our Lua type definitions.
+📦 node-postgres (pg)
+
+⚙️ Configuration (server.cfg)
+To connect to Supabase, use the Connection String found in your project settings (Settings > Database). It is highly recommended to use the Transaction Pooler (Port 6543).
+
+Bash
+# Supabase Connection String (Transaction Mode)
+set mysql_connection_string "postgres://postgres.your-project:[YOUR-PASSWORD]@aws-0-region.pooler.supabase.com:6543/postgres?sslmode=require"
+
+# Recommended Settings
+set mysql_slow_query_warning 150
+set mysql_debug false
+Warning: Always use the ?sslmode=require parameter to ensure a successful handshake with Supabase servers.
+
+🧾 SQL Syntax Notice
+Since this fork uses PostgreSQL, you must adapt your SQL queries:
+
+Placeholders: Use $1, $2, $3 instead of ?, ?, ? (or use named parameters if supported).
+
+Auto-increment: Use SERIAL or IDENTITY columns instead of AUTO_INCREMENT.
+
+Backticks: Replace backticks (`table`) with double quotes ("table") or remove them entirely if not using reserved words.
+
+🏗 Credits
+This project is a fork of the original oxmysql by the Overextended team.
+
+node-postgres - The PostgreSQL client for Node.js.
+Supabase - For the backend-as-a-service infrastructure.
